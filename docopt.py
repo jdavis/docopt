@@ -452,10 +452,11 @@ class Dict(dict):
         return '{%s}' % ',\n '.join('%r: %r' % i for i in sorted(self.items()))
 
 
-def docopt(doc, argv=sys.argv[1:], help=True, version=None, any_options=False):
-    DocoptExit.usage = printable_usage(doc)
+def docopt(doc, argv=sys.argv[1:], help=True, version=None, any_options=False, printable=True):
+    usage = printable_usage(doc)
+    DocoptExit.usage = usage if printable else doc
     options = parse_doc_options(doc)
-    pattern = parse_pattern(formal_usage(DocoptExit.usage), options)
+    pattern = parse_pattern(formal_usage(usage), options)
     argv = parse_argv(argv, list(options))
     for ao in pattern.flat(AnyOptions):
         doc_options = parse_doc_options(doc)
