@@ -20,5 +20,5 @@ from docopt import docopt
 
 
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version='Naval Fate 2.0')
+    arguments = docopt(__doc__, version='Naval Fate 2.0', printable=False)
     print(arguments)
